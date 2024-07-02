@@ -1,3 +1,8 @@
+# Recipe App
+
+Creating a recipe app using Django web framework. In this application PostgreSQL is used for the backend, HTML and CSS are used for the front end. And the app will be deployed on Heroku
+The final application is dynamic and multi-user, letting users sign up, and create their own content. It also has statistical dashboards, implementing data analytics and data visualizations.
+
 ## Creating a Django Project Structure
 
 Step 1:
