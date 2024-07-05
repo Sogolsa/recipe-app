@@ -110,3 +110,54 @@ The 'M' part of Django MVT is completed with these 4 steps.
 - Speed up testing by running tests in parallel (--parallel).
 
 - check out the full list of available commands by typing `python manage.py test --help`
+
+# Creating a Custom Welcome Page
+
+1. Defining the view in the app/views.py file.
+2. Creating the template(s) in the app/templates/ folder.
+3. Mapping the URL to view in app/urls.py.
+4. Registering the URL and view in project/urls.py.
+
+## Defining View
+
+- app/views.py: Specify the function => take a web request (as input) => return a web response.
+- Web response can be anything—an HTML page, an image, or whatever response you choose to provide
+- The important thing is to specify the file path that corresponds to the response, and to point exactly from where the response can be loaded
+
+## Creating Templates:
+
+1. Create a folder named templates within the app with defined view.
+2. Within the templates folder, create a new folder that is named the same as the app.
+3. Create the template pages as needed (recipes_app.html)
+4. Specify the path to recipes/recipes_home.html in the views.py file.
+
+## Map view to URL:
+
+1. Create a urls.py file in app folder
+2. Specify the path in app/urls.py => to connect to route corresponding to http://127.0.0.1:8000/ => with view specified by app/urls.py
+
+```bash
+from django.urls import path
+from .views import home
+
+
+app_name = "recipes"
+
+urlpatterns = [path("", home)]
+```
+
+3. Update the urls.py file in your main recipe project by registering the view to urlpatterns.
+
+```bash
+from django.contrib import admin
+from django.urls import path
+from django.urls import include
+
+urlpatterns = [path("admin/", admin.site.urls), path("", include("recipes.urls"))]
+```
+
+## Run Server
+
+- Navigate to project/src
+- Activate the virtual environment
+- run the server: `python manage.py runserver`
