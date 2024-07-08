@@ -161,3 +161,34 @@ urlpatterns = [path("admin/", admin.site.urls), path("", include("recipes.urls")
 - Navigate to project/src
 - Activate the virtual environment
 - run the server: `python manage.py runserver`
+
+# Accessing Records from the Database
+
+1. Specifying all attributes in the Recipes model.
+2. Entering recipes records in the database.
+3. Creating the view and templates to display the list of recipes and registering the URLs with the app (recipes) and the project.
+
+## Step 1: Specify Attributes in the Recipes Model
+
+1. Have a designated folder where the images will be stored(media in src). This needs to be done once per project.
+2. Specify the path to the folder in the project’s settings.py file. This also needs to be done once per project:
+
+```bash
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+```
+
+3. Specify URL-View mapping in the project’s urls.py file. This is a project-level entry and only needs to be done once per project.
+
+```bash
+from django.conf import settings
+from django.conf.urls.static import static
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+4. (and 5): Update the code in the models.py files to create the attribute in the database. Also, provide the no_picture.jpg image by default. For this, add the following statement in your recipes/models.py file:
+
+`pip install pillow`
+`pic = models.ImageField(upload_to='recipes', default='no_picture.jpg')`
+
+- Activate virtual environment => run `python manage.py makemigrations` => `python manage.py migrate` => Run server
