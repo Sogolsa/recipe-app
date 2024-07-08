@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
@@ -15,7 +16,10 @@ class Recipe(models.Model):
     difficulty = models.CharField(
         max_length=12, choices=difficulty_choices, default="Easy"
     )
-    description = models.TextField()
+    description = models.TextField(max_length=500, default="No description...")
+    pic = models.ImageField(upload_to="recipes", default="no_picture.jpg")
+    author = models.CharField(max_length=120, default="anonymous")
+    creation_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return str(self.name)
