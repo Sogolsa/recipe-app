@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe List</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #D5E4DE;
+        }
+
+        .Title {
+            background-color: #002A3A;
+            color: #EF426F;
+            text-align: center;
+            padding: 30px;
+            font-size: 22px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #D5E4DE;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: #212529;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links h1 {
+            color: #EF426F;
+        }
+
+        .main-box ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .main-box ul li {
+            justify-content: space-between;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .main-box ul li img {
+            max-width: 100%;
+            border-radius: 15%;
+        }
+
+        .links li h2 a {
+            color: #002A3A;
+            text-decoration: none;
+            transition: transform 0.5s;
+        }
+
+        .links li h2 a:hover {
+            font-size: xx-large;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="Title">
+        Recipes List
+    </div>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li>
+                <h1>Recipe App</h1>
+            </li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Recipes</a></li>
+        </ul>
+    </nav>
+    <main class="main-box">
+        <ul class="links">
+            {% for object in object_list %}
+
+            <li>
+                <h2><a href="{{object.get_absolute_url}}">{{object.name}}</a></h2>
+                <img src="{{object.pic.url}}" width="200" height="200" />
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+
+</html>
