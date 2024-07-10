@@ -11,7 +11,7 @@ class RecipeModelTest(TestCase):
             name="Tea",
             cooking_time=5,
             ingredients="Tea Leaves, Water, Sugar",
-            difficulty="Easy",
+            author="Anonymous",
         )
 
     def test_recipe_name(self):
@@ -51,3 +51,15 @@ class RecipeModelTest(TestCase):
         recipe = Recipe.objects.get(id=1)
         max_length = recipe._meta.get_field("difficulty").max_length
         self.assertEqual(max_length, 12)
+
+    def test_get_absolute_url(self):
+        recipe = Recipe.objects.get(id=1)
+        self.assertEqual(recipe.get_absolute_url(), "/recipes/1")
+
+    def test_calculate_difficulty(self):
+        """Test the calculate_difficulty method of Recipe model."""
+        recipe = Recipe.objects.get(name="Tea")
+        calculated_difficulty = recipe.calculate_difficulty()
+        self.assertEqual(recipe.difficulty, calculated_difficulty)
+        self.assertNotEqual(recipe.difficulty, "")
+        self.assertIsNotNone(calculated_difficulty)

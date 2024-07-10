@@ -22,7 +22,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-urlpatterns = [path("admin/", admin.site.urls), path("", include("recipes.urls"))]
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include("recipes.urls")),
+    path("", include("users.urls")),
+]
 
 # Step 3:(pic) URL-View mapping
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
