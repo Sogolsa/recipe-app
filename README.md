@@ -192,3 +192,53 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 `pic = models.ImageField(upload_to='recipes', default='no_picture.jpg')`
 
 - Activate virtual environment => run `python manage.py makemigrations` => `python manage.py migrate` => Run server
+
+## Step 2: Add Recipes (Records) in the Database
+
+- In the admin panel click add and add records
+
+## Step 3: Specify View, Create Template, and Register URL
+
+- Data is now in the database at the backend of Recipes application.
+- For Front end: 4 step process:
+
+1. Specify the View: recipes/views.py
+
+- Import Django's ListView package (display data as a list)
+- Import the Recipes Model(provides access to recipe records)
+- Create a class based view(custom logic is not needed, generic functionality is good enough) => specify the model and template
+
+2. Create Template:
+
+- template is an HTML file that should be created in the recipes/templates/recipes folder
+- create the recipe list first by accessing the model. Then, you’ll turn toward formatting and tabling.
+- when the view executes, the model’s records are stored as a list in the variable called object_list(built-in variable)
+- To access individual records within the object_list => loop through the list (for loop in recipes_list.html)
+- Once you register your URL, you’ll be able to see your list of recipes
+- Access recipe title and images: by {{object.name}} {{object.pic}}
+- Specify the path to the image file (using {{object.pic.url}}) and then use the HTML image tag <img> to show the image
+
+```bash
+{% for object in object_list %}
+   {{object.name}} - <img src="{{object.pic.url}}" width="150" height="200" />
+   <br>
+{% endfor %}
+```
+
+3. Map view to URL:
+
+- create a new file: recipes/urls.py.
+- To connect list/ with the RecipeListView (a class-based view), you need to call as_view() (a method of class ListView), which returns a callable view that takes a request and returns a response. as_view() => not needed for function based view
+
+`urlpatterns = [path("recipes/", RecipeListView.as_view(), name="recipes")]`
+
+4. Registering the View:
+
+- recipe_project/urls.py
+
+```bash
+urlpatterns = [
+   path('admin/', admin.site.urls),
+   path('', include('recipes.urls')),
+]
+```
