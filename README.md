@@ -242,3 +242,112 @@ urlpatterns = [
    path('', include('recipes.urls')),
 ]
 ```
+
+# Login and Authentication (4 Step Process)
+
+- Login form for recipe_project application (reached at “http://127.0.0.1:8000/login/”)
+- The 4 steps will be created under the recipe_project
+
+1. Create the view
+2. Create the template
+3. Specify the URL mapping
+4. Register the URL to the project
+
+## Step1: Create the View
+
+- In recipe_project folder => Create a new file => views.py
+- Create a new function based view login_view (login form based on django's authentication form)
+- Import Django's authentication libraries, and form for authentication:
+  `from django.contrib.auth import authenticate, login`
+  `from django.contrib.auth.forms import AuthenticationForm`
+
+- when user hits "login" button, then POST request is generated
+- read the data sent by the form via POST request
+- check if form is valid
+- use Django authenticate function to validate the user
+- then use pre-defined Django function to login
+
+## Step 2: Create the Template:
+
+- Under src: create folder => templates => create folder => auth => create file => login.html
+- Since this template is outside apps (new location) => tell django to look elsewhere for templates:
+- recipe_project/settings.py => scroll down to TEMPLATES list variable
+- Update DIRS list to: `'DIRS': [BASE_DIR / 'templates'],`
+- Save settings.py
+
+## Step 3: Specify the URL Mapping:
+
+- Since you are not coding within an app, skip this step and head over to project level urls.py
+
+## Step 4: Register the URL to the Project:
+
+- recipes_project/urls.py: import login_view from the views:
+  `from .views import login_view`
+- Include the login_view path in urlpatterns
+
+```bash
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include("recipes.urls")),
+    path("", include("users.urls")),
+    path('login/', login_view, name='login'),
+]
+```
+
+# Protecting Views
+
+- If you try to load the sales page without being logged in, Django will take you to the authentication form specified by LOGIN_URL in bookstore/settings.py
+- recipe_project/settings.py => towards the end of the script => add:
+
+```bash
+# Auth
+LOGIN_URL='/login/'
+```
+
+- Navigate to the view to protect
+
+## Protecting a Class-Based View (CBV)
+
+- recipes/views.py:
+
+```bash
+from django.contrib.auth.mixins import LoginRequiredMixin
+class RecipeListView(LoginRequiredMixin, ListView):
+    """Class based view"""
+
+    model = Recipe  # Specify model
+    template_name = "recipes/recipes_list.html"  # Specify template
+```
+
+## Protecting a Function-Based View (FBV)
+
+- recipes/records:
+
+```bash
+#to protect function-based views
+from django.contrib.auth.decorators import login_required
+#keep protected
+@login_required
+def profile(request):
+    user = User.objects.first()
+    context = {"user": user}
+    return render(request, "users/user_profile.html", context)
+```
+
+# Implement Logout
+
+- Create the view
+- Register the view
+- recipe_project/views.py: `from django.contrib.auth import logout`
+- Define a function based logout_view
+- Logout view doesn't need template => proceed to registering the URL to projects urls.py
+- Register URL to project's urls.py:
+
+```bash
+from .views import logout_view
+
+urlpatterns = [
+   ...
+   path('logout/', logout_view, name='logout'),
+]
+```
