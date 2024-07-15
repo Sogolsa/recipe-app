@@ -8,6 +8,7 @@
     <title>Login Page</title>
     <style>
         body {
+            /* min-height: 100vh; */
             margin: 0;
             padding: 0;
             background-color: #D5E4DE;
@@ -64,6 +65,31 @@
             cursor: pointer;
             transition: 0.3s ease-in-out;
         }
+
+        @media all and (max-width: 800px) {
+            .container {
+                padding: 10px;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .box {
+                margin: 35px;
+                padding: 10px;
+                padding: 15px 40px;
+            }
+
+            .box button {
+                padding: 10px;
+            }
+
+            .box form input {
+                margin-bottom: 10px;
+                padding: 5px;
+                border-radius: 5px;
+                width: 100%;
+            }
+        }
     </style>
 
 </head>
@@ -83,8 +109,10 @@
                 {% comment %} add button {% endcomment %}
                 <button type="submit">Login</button>
             </form>
+
         </div>
         <img src="{% static 'recipes/images/home-background.jpg' %}" alt="home">
+
 
     </main>
 
