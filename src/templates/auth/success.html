@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #D5E4DE;
+            height: 100vh;
+            background-size: cover;
+            /* background-repeat: no-repeat; */
+            overflow-x: hidden;
+            /* background-image: url("{% static 'recipes/images/home-background.jpg' %}"); */
+        }
+
+        .container {
+            max-width: 100%;
+            max-height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .box {
+            flex-direction: column;
+            padding: 70px;
+            justify-content: center;
+            text-align: center;
+            margin: 100px 100px 100px 200px;
+            background: #c5fae3;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(224, 8, 8, 0.1);
+        }
+
+        .button {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #002A3A;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <div class="box">
+            <h1>You have successfully logged out!</h1>
+            <a class="button" href="{% url 'login'%}">Login</a>
+            <a class="button" href="{% url 'recipes:home' %}">Homepage</a>
+        </div>
+        <img src="{% static 'recipes/images/home-background.jpg' %}" alt="home">
+    </main>
+
+</body>
+
+</html>
