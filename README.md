@@ -296,7 +296,7 @@ urlpatterns = [
 
 # Protecting Views
 
-- If you try to load the sales page without being logged in, Django will take you to the authentication form specified by LOGIN_URL in bookstore/settings.py
+- If you try to load the recipes list page without being logged in, Django will take you to the authentication form specified by LOGIN_URL in recipes/settings.py
 - recipe_project/settings.py => towards the end of the script => add:
 
 ```bash
