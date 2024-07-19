@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required  # To protect FBV
 from .forms import RecipesSearchForm
 import pandas as pd
 from django.db.models import Q
+from .utils import get_chart
 
 
 # Create your views here.
@@ -44,10 +45,12 @@ class RecipeListView(LoginRequiredMixin, ListView):
         # chart = None
         no_results = False
         recipes_html = None
+        chart = None
 
         if form.is_valid():
             """Check if the form is valid"""
             recipe_name = form.cleaned_data.get("recipe_name")  # Get the search term
+            chart_type = form.cleaned_data.get("chart_type")
 
             # Filter recipes based on the search term
             qs = Recipe.objects.filter(
@@ -58,6 +61,8 @@ class RecipeListView(LoginRequiredMixin, ListView):
                 recipes_df = pd.DataFrame(
                     qs.values()  # returns the list of recipes dictionaries
                 )  # Converts the queryset to pandas dataframe
+                chart = get_chart(chart_type, recipes_df)
+
                 recipes_html = recipes_df.to_html()
                 recipes = qs
 
@@ -71,6 +76,7 @@ class RecipeListView(LoginRequiredMixin, ListView):
             "no_results": no_results,
             "recipes_html": recipes_html,
             "search_performed": True,
+            "chart": chart,
         }
         return render(request, "recipes/recipes_list.html", context)
 
