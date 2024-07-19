@@ -33,7 +33,7 @@ class RecipeListView(LoginRequiredMixin, ListView):
         return render(
             request,
             "recipes/recipes_list.html",
-            {"form": form, "recipes": recipes},
+            {"form": form, "recipes": recipes, "search_performed": False},
         )  # Send the form and recipes to the template to be displayed
 
     def post(self, request, *args, **kwargs):
@@ -70,6 +70,7 @@ class RecipeListView(LoginRequiredMixin, ListView):
             "recipes": recipes,
             "no_results": no_results,
             "recipes_html": recipes_html,
+            "search_performed": True,
         }
         return render(request, "recipes/recipes_list.html", context)
 
