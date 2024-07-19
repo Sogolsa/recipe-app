@@ -2,6 +2,7 @@ from recipes.models import Recipe
 from io import BytesIO
 import base64  # encode and decode method on object
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def get_graph():
@@ -46,6 +47,36 @@ def get_chart(chart_type, data, **kwargs):
             False
         )  # make right side of frame invisible
         plt.gca().spines["top"].set_visible(False)  # make top side of frame invisible
+
+    elif chart_type == "#2":
+        data["difficulty"] = data["difficulty"].str.upper()
+        difficulty_counts = data["difficulty"].value_counts()
+        plt.pie(difficulty_counts, labels=difficulty_counts.index, autopct="%1.1f%%")
+        plt.title("Recipes by Difficulty")
+
+    elif chart_type == "#3":
+        # Convert the 'creation_date' column to datetime
+        data["creation_date"] = pd.to_datetime(data["creation_date"])
+
+        # Group by date and count the number of recipes per day
+        daily_counts = data.groupby(data["creation_date"].dt.date).size()
+        plt.plot(
+            daily_counts.index,
+            daily_counts.values,
+            marker="o",
+            linestyle="-",
+            color="b",
+        )
+        plt.xlabel("Date")
+        plt.ylabel("Number of Recipes")
+        plt.title("Number of Recipes Created per Day")
+        plt.xticks(rotation=45)
+        plt.grid(True)
+        plt.gca().spines["right"].set_visible(False)
+        plt.gca().spines["top"].set_visible(False)
+
+    else:
+        print("Unknown chart type")
 
     # We make sure everything fits nicely within the space.
     plt.tight_layout()
