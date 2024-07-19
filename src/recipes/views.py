@@ -46,6 +46,7 @@ class RecipeListView(LoginRequiredMixin, ListView):
         no_results = False
         recipes_html = None
         chart = None
+        recipes = []
 
         if form.is_valid():
             """Check if the form is valid"""
