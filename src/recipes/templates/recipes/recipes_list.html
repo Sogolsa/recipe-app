@@ -55,16 +55,51 @@
             color: #EF426F;
         }
 
+        .main-box p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .main-box form {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+
+        }
+
+        .main-box form input[type="text"],
+        .main-box form select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .main-box form button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #002A3A;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
         .main-box ul {
             list-style: none;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            /* flex-wrap: wrap; */
+            justify-content: center;
         }
 
         .main-box ul li {
             justify-content: space-between;
-            margin: 20px;
+            margin: 10px;
             text-align: center;
         }
 
@@ -72,6 +107,24 @@
             max-width: 100%;
             border-radius: 15%;
         }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            /* justify-content: space-between; */
+            gap: 20px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .links li {
+            flex: 1 1 calc(25% - 20px);
+            /* Four items per row with gaps */
+            max-width: calc(25% - 20px);
+            text-align: center;
+            margin: 10px;
+        }
+
 
         .links li h2 a {
             color: #002A3A;
@@ -81,6 +134,38 @@
 
         .links li h2 a:hover {
             color: #EF426F;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #002A3A;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        td a {
+            color: #EF426F;
+            text-decoration: none;
+        }
+
+        td a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -102,15 +187,35 @@
         </ul>
     </nav>
     <main class="main-box">
+        <p> Search for an ingredient or recipe name:</p>
+        <form action="{% url 'recipes:recipes' %}" method="POST">
+            {%csrf_token %}
+            {{form}}
+            <!-- {{ form.recipe_name }}
+            {{ form.chart_type }} -->
+            <button type="submit">Search</button>
+            <a href="{% url 'recipes:recipes' %}"><button type="button">Show all Recipes</button></a>
+        </form>
+        {% if no_results %}
+        <p>No recipes found matching your criteria.</p>
+        {% else %}
+        {% if recipes_html %}
+        <h2>Recipe Details</h2>
+        <div>
+            {{recipes_html|safe}}
+        </div>
+        {% endif %}
         <ul class="links">
-            {% for object in object_list %}
-
+            {% for recipe in recipes %}
             <li>
-                <h2><a href="{{object.get_absolute_url}}">{{object.name}}</a></h2>
-                <img src="{{object.pic.url}}" width="200" height="200" />
+                <h2><a href="{{recipe.get_absolute_url}}">{{recipe.name}}</a></h2>
+                <img src="{{recipe.pic.url}}" width="200" height="200" />
             </li>
             {% endfor %}
+
         </ul>
+
+        {% endif %}
     </main>
 </body>
 
