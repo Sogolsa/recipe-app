@@ -351,3 +351,91 @@ urlpatterns = [
    path('logout/', logout_view, name='logout'),
 ]
 ```
+
+# Data Analysis and Visualization in Django
+
+## Search For Records
+
+1. Take input from user via form.
+2. Display search records in a table.
+3. Display chart.
+
+### 1: Creating a User-Input Form (3 Step Process)
+
+#### Step 1: Create a form named recipes/forms.py
+
+- This will be to specify the search form fields
+- Create a new file named forms.py in recipe folder.
+- Import forms from Django:
+  `from django import forms`
+- Specify the fields that you want in your search form.
+  In recipes app => specify chart choices then => define the class based form: RecipesSearchForm
+- Import the RecipesSearchForm to the view for user input
+
+#### Step 2: Update view in recipes/views.py
+
+- Import the form you created in recipes/forms.py:
+  `from .forms import RecipesSearchForm`
+- Define function based view search_recipes that takes the request
+- Prepare the context dictionary to pass parameters from view to template.
+- Finally, send the request and context to the template recipes/recipes_list.html
+
+#### Step 3: Update recipes_list.html template in recipes/templates/recipes
+
+- Start by specifying a heading for the page
+- Include the form, using {{form}} that was sent from the view through the context dictionary (which was prepared in Step 2).
+- A button called search will be created with the “submit” form functionality
+- {% csrf_token %} => CSRF stands for Cross Site Request Forgery protection, which is a Django security feature
+
+# Implementing Search Functionality and Displaying Search Records
+
+- recipes/views.py file => implement search functionality.
+
+## Step 1: Read data entered into the form by the user.
+
+- recipes/views.py => check if form button is clicked (the request is made)
+- If true => read data from form
+
+## Step 2: Extract data from the database using QuerySet API.
+
+- QuerySet is an API used to provide access to data present in the database.
+- In recipes/views.py => `from .models import Recipe` => since we access the recipes data
+
+## Step 3: Convert QuerySet to pandas DataFrames to make data available for further processing.
+
+- pandas => python library => provides fast and efficient data analysis
+- DataFrame => 2 dimensional data structure => data stored in tabular form in rows and columns
+
+### Install pandas:
+
+- In terminal
+- Activate virtual environment
+- `pip install pandas`
+- Return to recipes/views.py
+  `import pandas as pd`
+- Next, initialize a DataFrame object as None in search_recipes()
+  `recipes_df=None`
+- Use the filter function to extract the desired results as a QuerySet.
+- Check if there’s any data matching the criteria, and if there is, then convert the QuerySet to a pandas DataFrame.
+  `recipes_df=pd.DataFrame(qs.values())`
+- At the end of search_recipes() function, update your context dictionary to send the recipes_df DataFrame to the recipes/recipes_list.html template.
+
+# Data Visualization
+
+- install matplotlib `pip install matplotlib`
+
+## Update recipes/utils.py to implement charting functions
+
+- Create a file-like object BytesIO (python method to manipulate binary data) and matplotlib
+
+```bash
+from io import BytesIO
+import base64  # Encode and Decode method on object
+import matplotlib.pyplot as plt
+```
+
+- Start implementing getgraph() => take care of low level image handling details =>done once per project
+- getgraph() function needs to be called by another function => getchart()
+- getchart() => implements the logic to prepare the chart based on user input => and calls getgraph() to generate the chart at file/byte level.
+
+- Next => recipes/views.py => call getchart():
