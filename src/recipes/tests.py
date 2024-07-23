@@ -1,5 +1,8 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from .models import Recipe
+from .forms import RecipesSearchForm
+from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 # Create your tests here.
@@ -63,3 +66,57 @@ class RecipeModelTest(TestCase):
         self.assertEqual(recipe.difficulty, calculated_difficulty)
         self.assertNotEqual(recipe.difficulty, "")
         self.assertIsNotNone(calculated_difficulty)
+
+
+class LoginTestCase(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        Recipe.objects.create(
+            name="Tea",
+            ingredients="Tea Leaves, Water, Sugar",
+        )
+        self.user = User.objects.create_user(
+            username="testuser", password="testpassword"
+        )
+
+    def test_authorized_list_access(self):
+        """Test accessing the list view as an authenticated user"""
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.get(reverse("recipes:recipes"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "recipes/recipes_list.html")
+
+    def test_authorized_details_access(self):
+        """Test accessing the details view as an authenticated user"""
+        self.client.login(username="testuser", password="testpassword")
+        recipe = Recipe.objects.get(id=1)
+        response = self.client.get(reverse("recipes:detail", args=[recipe.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "recipes/recipes_detail.html")
+
+    def test_unauthorized_list_access(self):
+        response = self.client.get(reverse("recipes:recipes"))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, f'/login/?next={reverse("recipes:recipes")}')
+
+    def test_unauthorized_details_access(self):
+        recipe = Recipe.objects.get(id=1)
+        response = self.client.get(reverse("recipes:detail", args=[recipe.id]))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response, f'/login/?next={reverse("recipes:detail", args=[recipe.id])}'
+        )
+
+
+class RecipeFormTest(TestCase):
+
+    # Check if the form validates with correct data
+    def test_valid_form(self):
+        form_data = {
+            "recipe_name": "",
+            "ingredient": "",
+            "chart_type": "#1",
+        }
+        form = RecipesSearchForm(data=form_data)
+        self.assertTrue(form.is_valid())
