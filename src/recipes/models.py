@@ -32,7 +32,7 @@ class Recipe(models.Model):
         if not self.difficulty:
             num_ingredients = len(self.ingredients.split(", "))
             if self.cooking_time < 10:
-                self.difficulty = "Easy" if num_ingredients < 4 else "Medium"
+                self.difficulty = "Easy" if num_ingredients < 4 else "Intermediate"
             else:
                 self.difficulty = "Intermediate" if num_ingredients < 4 else "Hard"
         return self.difficulty
