@@ -119,6 +119,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+# Add the path to the static folder
+STATICFILES_DIRS = [
+    BASE_DIR / "staticfiles",
+    BASE_DIR / "recipes" / "static",
+]
 
 # Step 2:(pic) Parameters needed for media files, corresponding to user-generated content
 MEDIA_URL = "/media/"

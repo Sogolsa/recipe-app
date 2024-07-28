@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{% static 'recipes/css/common.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'recipes/css/signup.css' %}">
+
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <main class="container">
+        <div class="box">
+            <h1>Sign Up</h1>
+            {% if error_message %}
+            <p>{{ error_message }}</p>
+            {% endif %}
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+        <!-- <img src="{% static 'recipes/images/home-background.jpg' %}" alt="home"> -->
+
+    </main>
+
+</body>
+
+</html>

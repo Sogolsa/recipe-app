@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #D5E4DE;
+    height: 100vh;
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+    overflow-x: hidden;
+    /* background-image: url("{% static 'recipes/images/home-background.jpg' %}"); */
+}
+
+.welcome {
+    background-color: #002A3A;
+    color: #EF426F;
+    text-align: center;
+    padding: 30px;
+    font-size: 22px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar:hover {
+    background-color: white;
+}
+
+.navbar ul li a:hover {
+    text-decoration: underline;
+    text-decoration-color: #60ddab;
+}
+
+
+.nav-links {
+    list-style: none;
+    /*No bullet points*/
+    display: flex;
+    /*Horizontal view*/
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #212529;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links h1 {
+    color: #EF426F;
+}
+
+.text {
+    flex: 1;
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 150px;
+}
+
+.text a {
+    text-decoration: none;
+    color: #002A3A;
+    font-size: 34px;
+}
+
+.text a:hover {
+    font-size: xx-large;
+
+}
+
+.arrow {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-size: 1.2em;
+}
+
+.image-container {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100vh;
+    object-fit: cover;
+    margin-right: 50px;
+}

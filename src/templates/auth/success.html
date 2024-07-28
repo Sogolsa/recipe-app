@@ -5,78 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'recipes/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'recipes/css/success.css' %}">
     <title>Logged Out</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #D5E4DE;
-            height: 100vh;
-            background-size: cover;
-            /* background-repeat: no-repeat; */
-            overflow-x: hidden;
-            /* background-image: url("{% static 'recipes/images/home-background.jpg' %}"); */
-        }
-
-        .container {
-            max-width: 100%;
-            max-height: 100%;
-            overflow: hidden;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .box {
-            flex-direction: column;
-            padding: 70px;
-            justify-content: center;
-            text-align: center;
-            margin: 100px 100px 100px 200px;
-            background: #c5fae3;
-            border-radius: 15px;
-            box-shadow: 0 4px 30px rgba(224, 8, 8, 0.1);
-        }
-
-        .button {
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #002A3A;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.3s ease-in-out;
-        }
-
-        @media all and (max-width: 800px) {
-            .container {
-                padding: 10px;
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .box {
-                margin: 35px;
-                padding: 10px;
-                padding: 15px 40px;
-            }
-
-            .box button {
-                padding: 10px;
-            }
-
-            .box form input {
-                margin-bottom: 10px;
-                padding: 5px;
-                border-radius: 5px;
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 
 <body>

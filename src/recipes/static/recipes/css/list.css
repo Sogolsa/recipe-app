@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #D5E4DE;
+}
+
+.Title {
+    background-color: #002A3A;
+    color: #EF426F;
+    text-align: center;
+    padding: 30px;
+    font-size: 22px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
+.navbar ul li a:hover {
+    text-decoration: underline;
+    text-decoration-color: #60ddab;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #212529;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links h1 {
+    color: #EF426F;
+}
+
+.main-box p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.main-box form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+
+}
+
+.main-box form input[type="text"],
+.main-box form select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.main-box form button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #002A3A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.main-box ul {
+    list-style: none;
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+}
+
+.main-box ul li {
+    justify-content: space-between;
+    margin: 10px;
+    text-align: center;
+}
+
+.main-box ul li img {
+    max-width: 100%;
+    border-radius: 15%;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.links li {
+    flex: 1 1 calc(25% - 20px);
+    /* Four items per row with gaps */
+    max-width: calc(25% - 20px);
+    text-align: center;
+    margin: 10px;
+}
+
+
+.links li h2 a {
+    color: #002A3A;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+
+.links li h2 a:hover {
+    color: #EF426F;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #002A3A;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+td a {
+    color: #EF426F;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
