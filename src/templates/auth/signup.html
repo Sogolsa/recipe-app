@@ -22,8 +22,12 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form }}
-                <button type="submit">Sign Up</button>
+                <button type="submit" class="button">Sign Up</button>
+                <a class="button" href="{% url 'login'%}">Login</a>
+
+
             </form>
+
         </div>
         <!-- <img src="{% static 'recipes/images/home-background.jpg' %}" alt="home"> -->
 
