@@ -7,6 +7,7 @@ from .forms import RecipesSearchForm, CreateRecipeForm
 import pandas as pd
 from django.db.models import Q
 from .utils import get_chart
+from django.contrib import messages
 
 
 # Create your views here.
@@ -118,7 +119,9 @@ def update_recipe(request, pk):
 
 @login_required
 def delete_recipe(request, pk):
-    recipe = get_object_or_404(recipe, pk=pk)
+    recipe = get_object_or_404(Recipe, pk=pk)
     if request.method == "POST":
         recipe.delete()
+        messages.success(request, "Recipe was successfully deleted.")
         return redirect("recipes:recipes")
+    return redirect("recipes:recipes")

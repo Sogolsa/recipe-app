@@ -26,6 +26,15 @@
         </ul>
     </nav>
     <main class="main-box">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% if search_performed %}
         <p> Search for an ingredient or recipe name:</p>
         <form action="{% url 'recipes:recipes' %}" method="POST">

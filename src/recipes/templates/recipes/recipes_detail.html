@@ -37,8 +37,37 @@
             <p><b>Difficulty: </b>{{object.difficulty}}</p>
             <p><b>Description: </b>{{object.description}}</p>
             <p><b>Creation Date: </b>{{object.creation_date}}</p>
+            {% if user.username == object.author.username %}
+            <div class="button-container">
+                <button id="open-modal" class="button">Update</button>
+                <button id="open-delete-modal" class="button">Delete</button>
+            </div>
+            {% endif %}
+            <!--Delete Modal Content-->
+            <dialog id="delete-modal" class="delete-modal-content">
+                <h2>Delete This Recipe</h2>
+                <form action="{% url 'recipes:delete_recipe' object.pk %}" method="POST">
+                    {% csrf_token %}
+                    <div class="button-container">
+                        <button type="submit" class="button delete-button">Delete</button>
+                        <button type="button" id="close-delete-modal" class="button button-secondary">Cancel</button>
+                    </div>
+                </form>
+            </dialog>
         </div>
     </main>
+    <script>
+        const openDeleteModalButton = document.querySelector("#open-delete-modal")
+        const closeDeleteModalButton = document.querySelector("#close-delete-modal")
+        const deleteModal = document.querySelector("#delete-modal")
+
+        openDeleteModalButton.addEventListener("click", () => {
+            deleteModal.showModal();
+        });
+        closeDeleteModalButton.addEventListener("click", () => {
+            deleteModal.close()
+        });  
+    </script>
 
 </body>
 
