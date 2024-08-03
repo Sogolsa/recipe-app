@@ -28,14 +28,78 @@
         </ul>
     </nav>
     <main class="image-container">
-        <h2 class="text">
-            <a href="{% url 'recipes:recipes' %}">
-                Check Out the Recipes
-                <span class="arrow">&rarr;</span>
-            </a>
-        </h2>
+        <div class="text-container">
+            <h2 class="text">
+                <a href="{% url 'recipes:recipes' %}">
+                    Check Out the Recipes
+                    <span class="arrow">&rarr;</span>
+                </a>
+            </h2>
+            <h2 class="text">
+                <a id="open-modal" class="link">
+                    Create New Recipe
+                    <span class="arrow">&rarr;</span>
+                </a>
+                <p class="warning">(You must be logged in!)</p>
+            </h2>
+        </div>
+
+
+        <dialog class="modal-content">
+
+            <h2>Create Recipe</h2>
+            <form action="{% url 'recipes:create_recipe' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cooking_time">Cooking Time:</label>
+                    <input type="number" id="cooking_time" name="cooking_time" placeholder="in min" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ingredients">
+                        Ingredients:
+                    </label>
+                    <input type="text" id="ingredients" name="ingredients"
+                        placeholder="Each ingredient separated by a comma" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea type="text" id="description" name="description" rows="5"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="pic">Picture:</label>
+                    <input type="file" id="pic" name="pic" accept="image/*">
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="button">Submit</button>
+                    <button type="button" id="close-modal-btn" class="button-secondary">Close</button>
+                </div>
+            </form>
+
+        </dialog>
         <img src="{% static 'recipes/images/home-background.jpg' %}" alt="home">
     </main>
+    <script>
+        const openLink = document.querySelector("#open-modal")
+        const closeButton = document.querySelector("#close-modal-btn")
+        const modal = document.querySelector(".modal-content")
+
+        openLink.addEventListener("click", () => {
+            modal.showModal()
+        })
+
+        closeButton.addEventListener("click", () => {
+            modal.close()
+        })
+    </script>
 
 
 </body>
