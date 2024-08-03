@@ -39,7 +39,7 @@
             <p><b>Creation Date: </b>{{object.creation_date}}</p>
             {% if user.username == object.author.username %}
             <div class="button-container">
-                <button id="open-modal" class="button">Update</button>
+                <button id="open-update-modal" class="button">Update</button>
                 <button id="open-delete-modal" class="button">Delete</button>
             </div>
             {% endif %}
@@ -54,19 +54,75 @@
                     </div>
                 </form>
             </dialog>
+            <!-- Update Modal Content-->
+            <dialog id="update-modal" class="update-modal-content">
+                <h2>Update Recipe</h2>
+                <form action="{% url 'recipes:update_recipe' object.pk %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" value="{{object.name}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cooking_time">Cooking Time:</label>
+                        <input type="number" id="cooking_time" name="cooking_time" value="{{object.cooking_time}}"
+                            placeholder="in min" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ingredients">
+                            Ingredients:
+                        </label>
+                        <input type="text" id="ingredients" name="ingredients" value="{{object.ingredients}}"
+                            placeholder="Each ingredient separated by a comma" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea type="text" id="description" name="description"
+                            rows="5">{{object.description}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pic">Picture:</label>
+                        <input type="file" id="pic" name="pic" accept="image/*">
+                    </div>
+
+                    <div>
+                        <button type="submit" class="button">Submit</button>
+                        <button type="button" id="close-update-modal" class="button button-secondary">Cancel</button>
+                    </div>
+
+                </form>
+
+            </dialog>
         </div>
+
     </main>
     <script>
-        const openDeleteModalButton = document.querySelector("#open-delete-modal")
+        const openDeleteModalButton = document.querySelector(" #open-delete-modal")
         const closeDeleteModalButton = document.querySelector("#close-delete-modal")
         const deleteModal = document.querySelector("#delete-modal")
+        const openUpdateModalButton = document.querySelector("#open-update-modal")
+        const closeUpdateModalButton = document.querySelector("#close-update-modal")
+        const updateModal = document.querySelector("#update-modal")
 
-        openDeleteModalButton.addEventListener("click", () => {
-            deleteModal.showModal();
-        });
+        openDeleteModalButton.addEventListener("click",
+            () => {
+                deleteModal.showModal();
+            });
         closeDeleteModalButton.addEventListener("click", () => {
-            deleteModal.close()
-        });  
+            deleteModal.close();
+        });
+
+        openUpdateModalButton.addEventListener("click", () => {
+            updateModal.showModal();
+        });
+        closeUpdateModalButton.addEventListener("click", () => {
+            updateModal.close();
+        });
+
     </script>
 
 </body>

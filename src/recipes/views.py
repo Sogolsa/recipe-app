@@ -105,12 +105,12 @@ def create_recipe(request):
 @login_required
 def update_recipe(request, pk):
     """Let the user update the recipe"""
-    recipe = get_object_or_404(recipe, pk=pk)
+    recipe = get_object_or_404(Recipe, pk=pk)
     if request.method == "POST":
         form = CreateRecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid():
             form.save()
-            return redirect("recipe:detail", pk=pk)
+            return redirect("recipes:detail", pk=pk)
     else:
         form = CreateRecipeForm(instance=recipe)
 
