@@ -122,6 +122,12 @@ def delete_recipe(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     if request.method == "POST":
         recipe.delete()
-        messages.success(request, "Recipe was successfully deleted.")
+        # messages.success(request, "Recipe was successfully deleted.")
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            "Profile was deleted successfully.",
+            extra_tags="recipe",
+        )
         return redirect("recipes:recipes")
     return redirect("recipes:recipes")

@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .models import CustomUser
 from django.contrib.auth.models import User
-from .forms import SignupForm
+from .forms import ProfileUpdateForm, SignupForm
 from django.contrib.auth import login, authenticate
+from django.contrib import messages
 
 
 # Create your views here.
@@ -44,3 +45,28 @@ def signup_view(request):
     else:
         form = SignupForm()
         return render(request, "auth/signup.html", {"form": form})
+
+
+@login_required
+def update_profile(request):
+    user_profile = get_object_or_404(CustomUser, user=request.user)
+
+    if request.method == "POST":
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            # messages.success(request, "Profile was updated successfully.")
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Profile was updated successfully.",
+                extra_tags="profile",
+            )
+
+            return redirect("users:profile")
+    else:
+        form = ProfileUpdateForm(instance=user_profile)
+
+    return render(
+        request, "users/user_profile.html", {"form": form, "current_user": user_profile}
+    )

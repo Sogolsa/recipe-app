@@ -29,3 +29,14 @@ class SignupForm(UserCreationForm):
             "*Your password must contain at least 8 characters and can't be entirely numeric."
         )
         self.fields["picture"].help_text = "Optional"
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ["name", "picture", "bio"]
+        widgets = {
+            "bio": forms.Textarea(
+                attrs={"rows": 3, "placeholder": "Tell us about yourself..."}
+            ),
+        }

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,6 +89,93 @@
             border-radius: 10px;
 
         }
+
+        .button {
+            background-color: #002A3A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 4px;
+        }
+
+        .button:hover {
+            background-color: rgb(203, 6, 6);
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            text-decoration: none;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+
+        .open-modal-content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .button-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button {
+                margin: 10px 0;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Style messages */
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            list-style-type: none;
+        }
+
+        .message.success {
+            padding-right: 10px;
+            padding-left: 10px;
+            background-color: #dff1e3;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -107,15 +195,78 @@
 
         </ul>
     </nav>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        {% if 'profile' in message.tags %}
+        <li class="message {{ message.tags }}">{{ message }}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
     <main class="main-box">
         <div class="pic">
-            <img src="{{current_user.picture.url}}" />
+            <img src="{{current_user.picture.url}}" alt="Profile picture of {{current_user.name}}" />
         </div>
         <div class="details">
             <p><b>Name: </b>{{current_user.name}}</p>
             <p><b>Bio: </b>{{current_user.bio}}</p>
+            {% if user == current_user.user %}
+            <div class="button-container">
+                <button id="open-update-modal" class="button">Update Your Profile</button>
+            </div>
+            {% endif %}
+            <!-- Update Profile Modal Content-->
+            <dialog id="update-modal" class="update-modal-content">
+                <h2>Update Profile</h2>
+                <form action="{% url 'users:update_profile' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" value="{{current_user.name}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio:</label>
+                        <textarea type="text" id="bio" name="bio" rows="5"
+                            placeholder="Tell us about yourself">{{current_user.bio}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="picture">Picture:</label>
+                        <input type="file" id="picture" name="picture" accept="image/*">
+                    </div>
+
+                    <div>
+                        <button type="submit" class="button">Submit</button>
+                        <button type="button" id="close-update-modal" class="button button-secondary">Cancel</button>
+                    </div>
+
+                </form>
+            </dialog>
         </div>
     </main>
+    <script>
+        const openUpdateProfileModal = document.getElementById("open-update-modal")
+        const closeUpdateProfileModal = document.getElementById("close-update-modal")
+        const updateProfileModal = document.getElementById("update-modal")
+
+        openUpdateProfileModal.addEventListener("click", () => {
+            updateProfileModal.showModal();
+        });
+        closeUpdateProfileModal.addEventListener("click", () => {
+            updateProfileModal.close();
+        });
+
+        // Hide the message after 5 seconds
+        window.addEventListener('DOMContentLoaded', (event) => {
+            setTimeout(() => {
+                const messages = document.querySelectorAll('.message');
+                messages.forEach(message => {
+                    message.style.display = 'none';
+                });
+            }, 5000);
+        });
+    </script>
 
 </body>
 
