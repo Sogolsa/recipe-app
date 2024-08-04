@@ -53,11 +53,16 @@ class RecipeListView(LoginRequiredMixin, ListView):
             """Check if the form is valid"""
             recipe_name = form.cleaned_data.get("recipe_name")  # Get the search term
             chart_type = form.cleaned_data.get("chart_type")
+            author_name = form.cleaned_data.get("author_name")
 
             # Filter recipes based on the search term
             qs = Recipe.objects.filter(
                 Q(name__icontains=recipe_name) | Q(ingredients__icontains=recipe_name)
             )
+
+            if author_name:
+                qs = qs.filter(author__username__icontains=author_name)
+
             if qs.exists():
                 """If any recipes matches the search criteria"""
                 recipes_df = pd.DataFrame(
@@ -98,8 +103,12 @@ def create_recipe(request):
             recipe.author = request.user  # Assign the logged in user
             recipe.save()
             return redirect("recipes:recipes")
+        # If form is not valid, you should render the form with errors
+        return render(request, "recipes/recipes_home.html", {"form": form})
     else:
         form = CreateRecipeForm()
+
+    return render(request, "recipes/recipes_home.html", {"form": form})
 
 
 @login_required

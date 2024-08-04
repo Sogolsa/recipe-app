@@ -32,6 +32,8 @@ class SignupForm(UserCreationForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+    username = forms.CharField(max_length=150, required=True, label="Username")
+
     class Meta:
         model = CustomUser
         fields = ["name", "picture", "bio"]
@@ -40,3 +42,18 @@ class ProfileUpdateForm(forms.ModelForm):
                 attrs={"rows": 3, "placeholder": "Tell us about yourself..."}
             ),
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields["username"].initial = user.username
+
+    def save(self, commit=True):
+        """Update the User instance along with CustomUser."""
+        user = self.instance.user
+        if user:
+            user.username = self.cleaned_data["username"]
+            if commit:
+                user.save()
+        return super().save(commit=commit)

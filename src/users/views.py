@@ -52,7 +52,9 @@ def update_profile(request):
     user_profile = get_object_or_404(CustomUser, user=request.user)
 
     if request.method == "POST":
-        form = ProfileUpdateForm(request.POST, request.FILES, instance=user_profile)
+        form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=user_profile, user=request.user
+        )
         if form.is_valid():
             form.save()
             # messages.success(request, "Profile was updated successfully.")
@@ -65,7 +67,7 @@ def update_profile(request):
 
             return redirect("users:profile")
     else:
-        form = ProfileUpdateForm(instance=user_profile)
+        form = ProfileUpdateForm(instance=user_profile, user=request.user)
 
     return render(
         request, "users/user_profile.html", {"form": form, "current_user": user_profile}

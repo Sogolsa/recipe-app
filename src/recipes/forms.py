@@ -17,6 +17,7 @@ class RecipesSearchForm(forms.Form):
         widget=forms.TextInput(attrs={"placeholder": "Type a recipe or ingredient"}),
     )
     chart_type = forms.ChoiceField(choices=CHART__CHOICES)
+    author_name = forms.CharField(required=False, label="Author Username")
 
 
 class CreateRecipeForm(forms.ModelForm):
