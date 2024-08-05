@@ -17,6 +17,10 @@ def home(request):
     return render(request, "recipes/recipes_home.html")
 
 
+def about_me(request):
+    return render(request, "recipes/about_me.html")
+
+
 class RecipeListView(LoginRequiredMixin, ListView):
     """Class based view with all recipes and search form"""
 
