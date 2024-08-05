@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from .models import Recipe
-from .forms import RecipesSearchForm
+from .forms import RecipesSearchForm, CreateRecipeForm
 from django.urls import reverse
 from django.contrib.auth.models import User
 
@@ -10,11 +10,13 @@ class RecipeModelTest(TestCase):
     """Set up non-modified objects used by all test methods"""
 
     def setUpTestData():
+        user = User.objects.create_user(username="testuser", password="testpassword")
+
         Recipe.objects.create(
             name="Tea",
             cooking_time=5,
             ingredients="Tea Leaves, Water, Sugar",
-            author="Anonymous",
+            author=user,
         )
 
     def test_recipe_name(self):
@@ -109,14 +111,26 @@ class LoginTestCase(TestCase):
         )
 
 
-class RecipeFormTest(TestCase):
+class RecipeFormsTest(TestCase):
+    def setUpTestData():
+        user = User.objects.create_user(username="testuser", password="testpassword")
+        Recipe.objects.create(
+            name="Test Recipe",
+            cooking_time=30,
+            ingredients="Ingredient 1, Ingredient 2",
+            instructions="Step 1, Step 2",
+            pic="test_pic.jpg",
+            author=user,
+        )
 
-    # Check if the form validates with correct data
-    def test_valid_form(self):
-        form_data = {
-            "recipe_name": "",
-            "ingredient": "",
-            "chart_type": "#1",
-        }
-        form = RecipesSearchForm(data=form_data)
-        self.assertTrue(form.is_valid())
+
+def test_recipes_search_form(self):
+    form_data = {"recipe_name": "Pancakes", "chart_type": "bar_chart"}
+    form = RecipesSearchForm(data=form_data)
+    self.assertTrue(form.is_valid())
+
+
+def test_create_recipe_form(self):
+    form_data = Recipe.objects.get(id=1).__dict__
+    form = CreateRecipeForm(data=form_data)
+    self.assertTrue(form.is_valid())
