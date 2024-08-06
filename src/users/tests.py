@@ -26,13 +26,13 @@ class UserModelTest(TestCase):
         self.assertEqual(user.picture, "no_picture.jpg")
 
     def test_user_username_max_length(self):
-        """test to see if the length of the username field is a maximum of 120 characters"""
+        """test to check if the length of the username field is a maximum of 120 characters"""
         user = CustomUser.objects.get(id=1)
         max_length = user.user._meta.get_field("username").max_length
         self.assertEqual(max_length, 150, "username has over 120 characters")
 
     def test_user_bio(self):
-        """test to see if the user's bio is initialized as expected"""
+        """test to check if the user's bio is initialized as expected"""
         user = CustomUser.objects.get(id=1)
         field_label = user._meta.get_field("bio").verbose_name
         self.assertEqual(field_label, "bio")
