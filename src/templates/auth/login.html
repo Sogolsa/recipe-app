@@ -16,7 +16,9 @@
         <div class="box">
             <h1>Login</h1>
             {% comment %} Check for the error message {% endcomment %}
-            {% if error_message %} {{error_message}} {% endif %}
+            {% if error_message %}
+            <div class="error-message">{{ error_message }}</div>
+            {% endif %}
             {% comment %} print form {% endcomment %}
             <form action="" method="POST">
                 {% comment %} add django security token {% endcomment %}
@@ -26,11 +28,7 @@
                 {% comment %} add button {% endcomment %}
                 <button type="submit">Login</button>
                 <a href="{% url 'users:signup' %}" class="button">Not signed up yet?</a>
-
-
             </form>
-
-
         </div>
         <img src="{% static 'recipes/images/home-background.jpg' %}" alt="home">
 
