@@ -15,8 +15,13 @@ class Profile(LoginRequiredMixin, DetailView):
     template_name = "users/user_profile.html"
     context_object_name = "current_user"
 
+    # def get_object(self, queryset=None):
+    #     return CustomUser.objects.get(user=self.request.user)
     def get_object(self, queryset=None):
-        return CustomUser.objects.get(user=self.request.user)
+        user = self.request.user
+        # Check if a CustomUser instance exists for the logged-in user
+        custom_user, created = CustomUser.objects.get_or_create(user=user)
+        return custom_user
 
 
 def signup_view(request):
