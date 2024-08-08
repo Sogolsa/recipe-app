@@ -3,6 +3,26 @@
 Creating a recipe app using Django web framework. In this application PostgreSQL is used for the backend, HTML and CSS are used for the front end. And the app will be deployed on Heroku
 The final application is dynamic and multi-user, letting users sign up, and create their own content. It also has statistical dashboards, implementing data analytics and data visualizations.
 
+# Dependencies used in Production
+
+- whitenoise==6.7.0
+- dj-database-url==2.2.0
+- gunicorn==22.0.0
+- psycopg2==2.9.9
+
+# Set up the app
+
+bash```
+
+1. git clone <repository-url>`
+2. cd recipe-app
+3. pip install -r requirements-dev.txt: install development dependencies.
+4. configure the settings: SECRET_KEY, DEBUG, DATABASES
+5. python manage.py migrate
+6. python manage.py createsuperuser
+7. python manage.py runserver
+
+````
 ## Creating a Django Project Structure
 
 Step 1:
@@ -62,7 +82,7 @@ Step 5: run the server
 ```bash
 from .models import <class name>
 admin.site.register(<class name>)
-```
+````
 
 3. Migrate the models to create tables:
 
