@@ -11,8 +11,7 @@ DEBUG = False
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 # Database
-# DATABASES = {"default": dj_database_url.config(default="sqlite:///db.sqlite3")}
-# DATABASES = {"default": dj_database_url.config(conn_max_age=500)}
+
 DATABASES = {
     "default": dj_database_url.config(
         # Replace this value with your local database's connection string.
@@ -20,6 +19,7 @@ DATABASES = {
         conn_max_age=500,
     )
 }
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     BASE_DIR / "recipes" / "static",

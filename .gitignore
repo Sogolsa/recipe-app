@@ -2,6 +2,9 @@
 *.bak
 # Database
 *.sqlite3
+# Ignore data.json
+data.json
+
 # .env file
 *.env
 
