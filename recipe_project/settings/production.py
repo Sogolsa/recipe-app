@@ -1,6 +1,7 @@
 from .base import *
 from decouple import config
 import dj_database_url
+import os
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("SECRET_KEY")
