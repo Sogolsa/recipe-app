@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Application definition
-DEBUG = config("DEBUG", cast=bool)
+DEBUG = config("DEBUG", cast=bool, default=False)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
