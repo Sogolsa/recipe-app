@@ -2,4 +2,36 @@
 *.bak
 # Database
 *.sqlite3
+# .env file
+*.env
+
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+
+# Django specific
+.python-version
+.mypy_cache/
+.tox/
+.nox/
+.coverage
+*.log
+*.pot
+*.py[cod]
+*.pyo
+.coverage
+nosetests.xml
+coverage.xml
+*.cover
+*.hypothesis/
+.tox/
+.nox/
+.coverage
+.pytest_cache/
 

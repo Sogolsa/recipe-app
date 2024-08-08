@@ -28,7 +28,7 @@ def login_view(request):
                 """If the use is authenticated, use pre-defined django function to login, 
                 and send the user to desired page"""
                 login(request, user)
-                return redirect('recipes:home')
+                return redirect('recipes:recipes')
         else:
             error_message = "Oops.. something went wrong"
 
