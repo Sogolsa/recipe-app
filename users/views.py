@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from .forms import ProfileUpdateForm, SignupForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -28,25 +29,29 @@ def signup_view(request):
     if request.method == "POST":
         form = SignupForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save()
-
-            CustomUser.objects.create(
-                user=user,
-                name=form.cleaned_data["name"],
-                picture=form.cleaned_data["picture"] or "no_picture.jpg",
-                bio=form.cleaned_data["bio"],
-            )
-
-            user = authenticate(
-                username=form.cleaned_data["username"],
-                password=form.cleaned_data["password1"],
-            )
-            if user is not None:
-                login(request, user)
-                return redirect("users:profile")
+            try:
+                user = form.save()
+                CustomUser.objects.create(
+                    user=user,
+                    name=form.cleaned_data["name"],
+                    picture=form.cleaned_data["picture"] or "no_picture.jpg",
+                    bio=form.cleaned_data["bio"],
+                )
+                user = authenticate(
+                    username=form.cleaned_data["username"],
+                    password=form.cleaned_data["password1"],
+                )
+                if user is not None:
+                    login(request, user)
+                    return redirect("users:profile")
+            except Exception as e:
+                return HttpResponse(f"An error occurred: {e}", status=500)
         else:
-            # Handle form errors
-            return render(request, "auth/signup.html", {"form": form})
+            return render(
+                request,
+                "auth/signup.html",
+                {"form": form, "error_message": "There were errors in the form"},
+            )
     else:
         form = SignupForm()
         return render(request, "auth/signup.html", {"form": form})

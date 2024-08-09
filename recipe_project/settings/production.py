@@ -9,12 +9,12 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "recipe-share-ofmj.onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 # Database
 
 DATABASES = {
-    "default": dj_database_url.config(default=config("DATABASE_URL"), conn_max_age=500),
+    "default": dj_database_url.config(default=config("DATABASE_URL"), conn_max_age=600),
 }
 
 STATICFILES_DIRS = [
