@@ -2,7 +2,6 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import time
 
 from recipe_project.settings import base
 
@@ -15,8 +14,6 @@ def main():
         os.environ.setdefault(
             "DJANGO_SETTINGS_MODULE", "recipe_project.settings.production"
         )
-
-    time.sleep(3)
 
     try:
         from django.core.management import execute_from_command_line
