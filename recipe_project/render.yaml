@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: recipe-share
-    runtime: python
-    # buildCommand: './build.sh'
-    buildCommand: 'pip install -r requirements.txt'
-    startCommand: 'gunicorn recipe_project.wsgi:application'

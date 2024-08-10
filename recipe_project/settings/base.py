@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "users",
 ]
 
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -49,8 +50,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "recipe_project.urls"
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 TEMPLATES = [
@@ -114,6 +113,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "recipes" / "static",
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 # Step 2:(pic) Parameters needed for media files, corresponding to user-generated content
 MEDIA_URL = "/media/"
