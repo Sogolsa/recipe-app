@@ -3,17 +3,17 @@
 import os
 import sys
 
-from recipe_project.settings import base
-
 
 def main():
     """Run administrative tasks."""
-    if base.DEBUG:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "recipe_project.settings.local")
-    else:
-        os.environ.setdefault(
-            "DJANGO_SETTINGS_MODULE", "recipe_project.settings.production"
-        )
+
+    os.environ.setdefault(
+        "DJANGO_SETTINGS_MODULE", "recipe_project.settings.production"
+    )
+    # else:
+    #     os.environ.setdefault(
+    #         "DJANGO_SETTINGS_MODULE", "recipe_project.settings.production"
+    #     )
 
     try:
         from django.core.management import execute_from_command_line

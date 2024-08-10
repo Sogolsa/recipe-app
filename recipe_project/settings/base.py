@@ -11,8 +11,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+import os
 
+# from decouple import config
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -21,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-SECRET_KEY = config("SECRET_KEY")
+
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # Application definition
-DEBUG = config("DEBUG", cast=bool, default=False)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
