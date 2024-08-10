@@ -7,9 +7,16 @@ For more information on this file, see
 https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 """
 
+import time
+
 import os
+from django.core.wsgi import get_wsgi_application
+
+
+time.sleep(3)
+
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "recipe_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "recipe_project.settings.production")
 application = get_wsgi_application()
