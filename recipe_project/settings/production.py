@@ -8,7 +8,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", default="default_secret_key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "recipe-app-qc2m.onrender.com/"]
 
 # Database
 
