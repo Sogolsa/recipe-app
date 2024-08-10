@@ -13,18 +13,8 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 # Database
 
-# DATABASES = {
-#     "default": dj_database_url.config(default=config("DATABASE_URL"), conn_max_age=600),
-# }
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "recipesDB",
-        "USER": config("USER"),
-        "PASSWORD": config("PASSWORD"),
-        "HOST": config("HOST"),
-        "PORT": "5432",
-    }
+    "default": dj_database_url.config(default=config("DATABASE_URL"), conn_max_age=600),
 }
 
 STATICFILES_DIRS = [
