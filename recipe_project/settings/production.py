@@ -3,12 +3,13 @@ from .base import *
 import dj_database_url
 
 
-SECRET_KEY = os.getenv("SECRET_KEY", default="default_secret_key")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "recipe-app-qc2m.onrender.com/"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com/", "heroku.com"]
+
 
 # Database
 

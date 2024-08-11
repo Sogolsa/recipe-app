@@ -1,13 +1,6 @@
 from .base import *
 
-# import dj_database_url
-import environ
-
-
-env = environ.Env()
-environ.Env.read_env()
-
-SECRET_KEY = env("SECRET_KEY", default="default_secret_key")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
