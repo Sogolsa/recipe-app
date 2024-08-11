@@ -129,6 +129,10 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "LOCATION": "media",  # Update this to your media file storage location
+    },
 }
 
 # Step 2:(pic) Parameters needed for media files, corresponding to user-generated content
