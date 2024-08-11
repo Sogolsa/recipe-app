@@ -8,7 +8,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com/", "heroku.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "recipe-app-79zp.onrender.com", "heroku.com"]
 
 
 # Database
