@@ -16,18 +16,22 @@ import os
 # from decouple import config
 from dotenv import load_dotenv
 
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+# Load the .env file from the root
+env_path = load_dotenv(os.path.join(BASE_DIR, ".env"))
+load_dotenv(env_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-# DEBUG = os.getenv("DEBUG") == "True"
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", "django-insecure-&psk#na5l=p3q8_a+-$4w1f^lt3lx1c@d*p4x$ymm_rn7pwb87"
+)
+DEBUG = os.environ.get("DEBUG", "False") != "False"
 
 
 # Application definition
@@ -121,8 +125,11 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Step 2:(pic) Parameters needed for media files, corresponding to user-generated content
 MEDIA_URL = "/media/"
