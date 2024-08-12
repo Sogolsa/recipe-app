@@ -46,20 +46,9 @@
         <form action="{% url 'recipes:recipes' %}" method="POST">
             {%csrf_token %}
             {{form}}
-            <!-- {{ form.recipe_name }}
-            {{ form.chart_type }} -->
             <button type="submit">Search</button>
             <a href="{% url 'recipes:recipes' %}"><button type="button">Show all Recipes</button></a>
         </form>
-        {% else %}
-        <p> Search for an ingredient or recipe name:</p>
-        <form action="{% url 'recipes:recipes' %}" method="POST">
-            {%csrf_token %}
-            {{form}}
-            <button type="submit">Search</button>
-            {% endif %}
-        </form>
-
         {% if no_results %}
         <p>No recipes found matching your criteria.</p>
         {% else %}
@@ -81,11 +70,24 @@
             {% if chart %}
             <img src="data:image/png;base64, {{ chart|safe }}">
             {% endif %}
-
-            <!-- <img src="data:image/png;base64, {{chart|safe}}"> -->
-
         </ul>
+        {% endif %}
 
+        {% else %}
+        <p> Search for an ingredient or recipe name:</p>
+        <form action="{% url 'recipes:recipes' %}" method="POST">
+            {%csrf_token %}
+            {{form}}
+            <button type="submit">Search</button>
+        </form>
+        <ul class="links">
+            {% for recipe in recipes %}
+            <li>
+                <h2><a href="{{recipe.get_absolute_url}}">{{recipe.name}}</a></h2>
+                <img src="{{recipe.pic.url}}" width="200" height="200" />
+            </li>
+            {% endfor %}
+        </ul>
         {% endif %}
     </main>
     <script>
