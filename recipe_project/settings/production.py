@@ -20,3 +20,27 @@ DATABASES = {
         conn_health_checks=True,
     ),
 }
+
+# AWS configuration
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+
+
+# Basic Storage configuration for Amazon S3
+
+AWS_STORAGE_BUCKET_NAME = "recipe-bkt"
+AWS_S3_CUSTOM_DOMAIN = "%s.s3.amazonaws.com" % AWS_STORAGE_BUCKET_NAME
+
+# Don't overwrite files with same name
+AWS_S3_FILE_OVERWRITE = False
+
+STORAGES = {
+    # CSS and JS file
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+    # Media files management
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+}
