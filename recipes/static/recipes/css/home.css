@@ -19,7 +19,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
 }
+
+/* .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+} */
 
 .navbar:hover {
     background-color: white;
@@ -36,12 +45,17 @@ body {
     /*No bullet points*/
     display: flex;
     /*Horizontal view*/
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
     width: 100%;
     max-width: 800px;
-    margin: 0;
+    margin-left: 0;
     padding: 0;
+
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
 }
 
 .nav-links a {
@@ -50,10 +64,30 @@ body {
     font-weight: bold;
     text-decoration: none;
     transition: color 0.3s;
+    justify-content: center;
 }
 
 .nav-links h1 {
     color: #EF426F;
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    align-items: right;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active span {
+    background-color: transparent;
 }
 
 .text-container {
@@ -177,15 +211,31 @@ h2 {
 
 /* Media Queries for Smaller Screens */
 @media (max-width: 768px) {
-    /* .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
 
     .nav-links {
+        display: none;
         flex-direction: column;
-        width: auto;
-    } */
+        width: 100%;
+        align-items: center;
+
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .hamburger-menu span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        margin: 5px 0;
+        background-color: #000;
+        transition: all 0.3s ease;
+    }
 
     .text-container {
         margin-right: 0;
@@ -222,9 +272,35 @@ h2 {
         padding: 20px;
     }
 
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .hamburger-menu span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        margin: 5px 0;
+        background-color: #000;
+        transition: all 0.3s ease;
+    }
+
+
     .nav-links a {
         font-size: 16px;
     }
+
+
 
     .text a {
         font-size: 20px;

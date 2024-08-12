@@ -14,7 +14,7 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
+
 }
 
 .box {
@@ -46,15 +46,47 @@ body {
 
 @media all and (max-width: 800px) {
     .container {
+        /* padding: 10px; */
+        flex-direction: column;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .box {
+        margin: 20px;
+        padding: 20px;
+        height: 200%;
+        max-width: 80%;
+        height: auto;
+        overflow: visible;
+    }
+
+    .box button {
+        padding: 5px;
+    }
+
+    .box form input {
+        margin-bottom: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        max-width: 80%;
+    }
+}
+
+@media all and (max-width: 480px) {
+    .container {
         padding: 10px;
         flex-direction: column;
         width: 100%;
+
     }
 
     .box {
         margin: 35px;
         padding: 10px;
         padding: 15px 40px;
+        height: 100%;
+
     }
 
     .box button {

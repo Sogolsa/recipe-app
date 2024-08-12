@@ -35,6 +35,11 @@ body {
     padding: 0;
 }
 
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
+
 .nav-links a {
     color: #212529;
     font-size: 18px;
@@ -45,6 +50,25 @@ body {
 
 .nav-links h1 {
     color: #EF426F;
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    align-items: right;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active span {
+    background-color: transparent;
 }
 
 .main-box p {
@@ -184,4 +208,88 @@ td a:hover {
     background-color: #f8d7da;
     color: #721c24;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .hamburger-menu span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        margin: 5px 0;
+        background-color: #000;
+        transition: all 0.3s ease;
+    }
+
+    .links {
+        flex-direction: column;
+        /* width: 100%; */
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .links li {
+        flex: 1 1 calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+}
+
+
+
+@media (max-width: 480px) {
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .hamburger-menu span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        margin: 5px 0;
+        background-color: #000;
+        transition: all 0.3s ease;
+    }
+
+    .links {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .links li {
+        flex: 1 1 calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
 }

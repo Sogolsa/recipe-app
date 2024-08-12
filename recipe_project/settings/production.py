@@ -20,9 +20,3 @@ DATABASES = {
         conn_health_checks=True,
     ),
 }
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    BASE_DIR / "recipes" / "static",
-]
-STATIC_ROOT = BASE_DIR / "staticfiles"

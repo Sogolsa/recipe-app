@@ -15,6 +15,11 @@
         Recipe Details
     </div>
     <nav class="navbar">
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <ul class="nav-links">
             <li>
                 <h1>Recipe App</h1>
@@ -102,28 +107,47 @@
 
     </main>
     <script>
-        const openDeleteModalButton = document.querySelector(" #open-delete-modal")
-        const closeDeleteModalButton = document.querySelector("#close-delete-modal")
-        const deleteModal = document.querySelector("#delete-modal")
-        const openUpdateModalButton = document.querySelector("#open-update-modal")
-        const closeUpdateModalButton = document.querySelector("#close-update-modal")
-        const updateModal = document.querySelector("#update-modal")
+        document.addEventListener('DOMContentLoaded', function () {
+            const openDeleteModalButton = document.querySelector("#open-delete-modal");
+            const closeDeleteModalButton = document.querySelector("#close-delete-modal");
+            const deleteModal = document.querySelector("#delete-modal");
+            const openUpdateModalButton = document.querySelector("#open-update-modal");
+            const closeUpdateModalButton = document.querySelector("#close-update-modal");
+            const updateModal = document.querySelector("#update-modal");
 
-        openDeleteModalButton.addEventListener("click",
-            () => {
-                deleteModal.showModal();
-            });
-        closeDeleteModalButton.addEventListener("click", () => {
-            deleteModal.close();
-        });
+            if (openDeleteModalButton) {
+                openDeleteModalButton.addEventListener("click", () => {
+                    deleteModal.showModal();
+                });
+            }
 
-        openUpdateModalButton.addEventListener("click", () => {
-            updateModal.showModal();
-        });
-        closeUpdateModalButton.addEventListener("click", () => {
-            updateModal.close();
-        });
+            if (closeDeleteModalButton) {
+                closeDeleteModalButton.addEventListener("click", () => {
+                    deleteModal.close();
+                });
+            }
 
+            if (openUpdateModalButton) {
+                openUpdateModalButton.addEventListener("click", () => {
+                    updateModal.showModal();
+                });
+            }
+
+            if (closeUpdateModalButton) {
+                closeUpdateModalButton.addEventListener("click", () => {
+                    updateModal.close();
+                });
+            }
+
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (hamburgerMenu) {
+                hamburgerMenu.addEventListener('click', function () {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
     </script>
 
 </body>
