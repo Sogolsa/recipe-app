@@ -34,18 +34,17 @@ AWS_S3_CUSTOM_DOMAIN = "%s.s3.amazonaws.com" % AWS_STORAGE_BUCKET_NAME
 # Don't overwrite files with same name
 AWS_S3_FILE_OVERWRITE = False
 
-# STORAGES = {
-#     # CSS and JS file
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-#     # Media files management
-#     "default": {
-#         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-#     },
-# }
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STORAGES = {
+    # CSS and JS file
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+    # Media files management
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+}
+
 
 # Logging configuration
 LOGGING = {
