@@ -130,8 +130,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Step 2:(pic) Parameters needed for media files, corresponding to user-generated content
 # MEDIA_URL = "/media/"
-MEDIA_URL = "https://recipe-bkt.s3.amazonaws.com/recipes/"
-
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
