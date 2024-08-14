@@ -12,7 +12,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "recipe-app-79zp.onrender.com",
-    "radiant-brook-87990-20d91401d7c4.herokuapp.com/",
+    "radiant-brook-87990-20d91401d7c4.herokuapp.com",
 ]
 
 
